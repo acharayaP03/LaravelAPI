@@ -17,13 +17,19 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Documentation
  - Database migration 
+
     [ Create database - laravelAPI, then edit .env file- add database name, user and password]
+
     [ Migration commad - php artisan make:migration create_articles_table --create=articles -> Created Migration: 2020_02_02_054201_create_articles_table]
+    
  - Generate Article Seeder 
+
     [ Seeder Command- php artisan make:seeder ArticlesTableSeeder -> Seeder created successfully.]
 - Generate Article Factory 
+
     [ Factory Command- php artisan make:factory ArticleFactory] -> Factory created successfully.
 - Create Article Model 
+
     [ Model Command- php artisan make:model Article] -> Model created successfully.
 
 All this are necessary for running database migration. Similar logic should be applied for all tables in the future.
@@ -37,9 +43,11 @@ All this are necessary for running database migration. Similar logic should be a
     Migrating: 2020_02_02_054201_create_articles_table
     Migrated:  2020_02_02_054201_create_articles_table (0.08 seconds)
 - Seed DB
+
     [ php artisan db:seed] -> Seeding: ArticlesTableSeeder, Database seeding completed successfully.
 
 - Create Controller
+
     [ php artisan make:controller ArticleController --resource] -> Controller created successfully.
     --resource creates all the methods such as create(), store(), edit() and so on.
 
