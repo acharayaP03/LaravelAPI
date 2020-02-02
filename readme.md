@@ -59,7 +59,9 @@ Model with App\Article
 
 I try to list all issues out here while on development phase. 
 
+Create Resource 
 
+    [Create Resource php artisan make:resource Article] -> Resource created successfully.
 
 ## Contributing
 
