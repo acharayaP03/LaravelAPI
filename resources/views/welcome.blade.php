@@ -17,6 +17,15 @@
         <div id="app">
             <navbar></navbar>
             <div class="container">
+                <div class="jumbotron">
+                    <h1 class="display-4">Articel</h1>
+                    <p class="lead">This is a simple laravel and Vue project.</p>
+                    <hr class="my-4">
+                    <p>It uses laravel api at the backend and Vuejs in the front end. We have used boostrap as css template. </p>
+                    <p class="lead">
+                      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    </p>
+                </div>
                 <my-article></my-article>
             </div>
         </div>
