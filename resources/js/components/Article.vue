@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <div v-if="message !=''" class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
         <div class="row ">
             <nav aria-label="Page navigation example ">
                 <ul class="pagination text-left">
@@ -19,7 +22,9 @@
             <div class="card  mb-2 w-100" v-for="article in articles" :key="article.id">
                 <div class="card-header">{{ article.title }}</div>
                 <div class="card-body">
-                   {{  article.body }}
+                    <p class="card-text">{{  article.body }}</p>
+                 <hr>
+                    <button class="btn btn-danger" @click="deleteArticle(article.id)">Delete</button>
                 </div>
             </div>
         </div>
@@ -31,6 +36,7 @@
         name: 'myArticle',
         data(){
             return{
+                message: '',
                 articles: [],
                 article: {
                     id: '',
@@ -72,6 +78,19 @@
                 }
 
                 this.pagination = pagination;
+            },
+            deleteArticle(id){
+                if(confirm('Are you sure?')){
+                    fetch(`api/article/${id}`, {
+                        method: 'delete'
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        this.message = 'Article Deleted ...';
+                        this.fetchArticles();
+                    })
+                    .catch(err => console.log(err))
+                }
             }
         },
         mounted() {
