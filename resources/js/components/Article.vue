@@ -1,9 +1,19 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row ">
+
+            <nav aria-label="Page navigation example ">
+                <ul class="pagination text-left">
+                    <li :class="[{disabled: !pagination.prev_page_url}]" class="page-item">
+                        <a class="page-link" href="#" @click="fetchArticles(pagination.prev_page_url)">Previous</a>
+                    </li>
+                    <li class="page-item" :class="[{disabled: !pagination.next_page_url}]">
+                        <a class="page-link" href="#"  @click="fetchArticles(pagination.next_page_url)">Next</a>
+                    </li>
+                </ul>
+            </nav>
             <div class="card  mb-2" v-for="article in articles" :key="article.id">
                 <div class="card-header">{{ article.title }}</div>
-
                 <div class="card-body">
                    {{  article.body }}
                 </div>
@@ -32,14 +42,32 @@
             this.fetchArticles();
         },
         methods:{
-            fetchArticles(){
+            fetchArticles(page_url){
+                //for pagination......
+                let vm = this;
+                //return json with pagination or just return list of aritcles if no pagination.
+                page_url = page_url || '/api/articles';
                 fetch('api/articles')
                 .then(res => res.json())
                 .then(res => {
                     //console.log(res.data);
-
-                    this.articles = res.data
+                    this.articles = res.data;
+                    console.log(res.data)
+                    vm.makePagination(res.meta, res.links);
                 })
+                .catch(err => console.log(err))
+                //show error if there is any.
+            },
+            makePagination(meta, links){
+                let pagination ={
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url : links.next,
+                    prev_page_url : links.prev
+                }
+
+                this.pagination = pagination;
+                console.log('click')
             }
         },
         mounted() {
